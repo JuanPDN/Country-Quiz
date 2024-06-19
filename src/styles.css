@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --linear-gradiant: linear-gradient(#E65895, #BC6BE8);
+    --color-E2E4F3: #393F6E;
+    --color-E2E4F3: #E2E4F3;
+    --color-343964: #343964;
+    --color-3E9FFF: #3E9FFF;
+    --color-DD524C: #DD524C;
+    --color-8B8EAB: #8B8EAB;
+    --color-FFECC8: #FFECC8;
+    --font-primary: 'Be Vietnam Pro', sans-serif;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-image: url("../public/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed
+}
