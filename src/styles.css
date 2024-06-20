@@ -13,11 +13,17 @@
     --font-primary: 'Be Vietnam Pro', sans-serif;
 }
 
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {    
     font-family: var(--font-primary);
     background-image: url("../public/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed
+    background-attachment: fixed;
 }

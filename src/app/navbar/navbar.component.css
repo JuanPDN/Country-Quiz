@@ -1,0 +1,22 @@
+ul{
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 16px 0px;
+    gap: 16px;
+}
+li{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 50%;
+    color: var(--color-E2E4F3);
+    background-color: rgba(55, 61, 109);
+    cursor: pointer;
+}
