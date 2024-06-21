@@ -1,11 +1,11 @@
 .container {
     display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
     flex-direction: column;
-    width: 100%;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 36px;
+    padding: 32px;
 }
 
 .card {

@@ -4,8 +4,14 @@ ul{
     flex-wrap: wrap;
     justify-content: center;
     margin: 16px 0px;
-    gap: 16px;
+    gap: 12px;
 }
+@media screen and (min-width: 640px) {
+    ul{
+        margin: 16px 68px;
+    }  
+}
+
 li{
     height: 40px;
     width: 40px;
@@ -14,7 +20,7 @@ li{
     justify-content: center;
     list-style-type: none;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 50%;
     color: var(--color-E2E4F3);
     background-color: rgba(55, 61, 109);
