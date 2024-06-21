@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-finish',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [],
   templateUrl: './finish.component.html',
   styleUrl: './finish.component.css'
 })
