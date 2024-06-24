@@ -17,9 +17,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-body {    
+body {
     font-family: var(--font-primary);
     background-image: url("../public/bg.jpg");
     background-size: cover;

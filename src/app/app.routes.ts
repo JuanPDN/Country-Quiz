@@ -3,7 +3,12 @@ import { GameComponent } from './game/game.component';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'game/:questionId',
         component: GameComponent
+    },
+    {
+        path: '',
+        redirectTo: 'game/1',
+        pathMatch: 'full'
     }
 ];
