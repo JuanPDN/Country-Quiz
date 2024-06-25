@@ -22,18 +22,43 @@ export class GameComponent implements OnInit {
             this.questionId = Number(params['questionId']);
         });
     }
+
+    seeOptions(){
+        console.log(this.questions);
+        
+    }
     randomCountries(): number {
         return Math.floor(Math.random() * 250) + 1;
     }
+
+    shuffle(array: any[]) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array
+    }
+
     ngOnInit(): void {
         this.dataService.getAllData().subscribe(
             (data) => {
                 let response = data.map((item: any) => {
+
+                    let options = [item]
+                    while (options.length < 4) {
+                        let randomIndex = this.randomCountries();
+                        if (!options.includes(data[randomIndex])) {
+                            options.push(data[randomIndex]);
+                        }
+                    }
+
+                    options = this.shuffle(options);                    
+
                     return {
                         name: item.name.common,
                         capital: item.capital,
                         flag: item.flag,
-                        options: Array.from({ length: 3 }, () => data[this.randomCountries()]),
+                        options: options,
                         questionNumber: Math.floor(Math.random() * 3) + 1,
                     }
                 })
@@ -43,5 +68,5 @@ export class GameComponent implements OnInit {
                 }
             }
         );
-    }
+    }    
 }

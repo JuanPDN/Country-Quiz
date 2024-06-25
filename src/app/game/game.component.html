@@ -3,9 +3,15 @@
         <h1>Country Quiz</h1>
         <app-navbar />
         <section>
-            <p class="question">Wich country is Kuala Lumpur the capital?</p>
+            @if(questions[questionId-1]?.questionNumber == 3){
+            <p class="question">Which country is {{ questions[questionId-1]?.capital }} the capital of?</p>
+            }@if(questions[questionId-1]?.questionNumber == 2) {
+            <p class="question">Which country does this flag {{ questions[questionId-1]?.flag }} belong to?</p>
+            }@if(questions[questionId-1]?.questionNumber == 1) {
+            <p class="question">Which city is the capital of {{ questions[questionId-1]?.name }}?</p>
+            }
             <div class="options">
-                <p class="button">Sweden</p>
+                <p (click)="seeOptions()" class="button">Sweden</p>
                 <p class="button">Vietnam</p>
                 <p class="button">Malaysia</p>
                 <p class="button">Austia</p>
