@@ -3,18 +3,16 @@
         <h1>Country Quiz</h1>
         <app-navbar />
         <section>
-            @if(questions[questionId-1]?.questionNumber == 3){
-            <p class="question">Which country is {{ questions[questionId-1]?.capital }} the capital of?</p>
-            }@if(questions[questionId-1]?.questionNumber == 2) {
-            <p class="question">Which country does this flag {{ questions[questionId-1]?.flag }} belong to?</p>
-            }@if(questions[questionId-1]?.questionNumber == 1) {
-            <p class="question">Which city is the capital of {{ questions[questionId-1]?.name }}?</p>
-            }
-            <div class="options">
-                <p (click)="seeOptions()" class="button">Sweden</p>
-                <p class="button">Vietnam</p>
-                <p class="button">Malaysia</p>
-                <p class="button">Austia</p>
+
+            <p class="question">{{questions[questionId-1]?.question}}</p>
+            <div (click)="seeOptions($event)" class="options">
+                @for(question of questions[questionId-1]?.options; track $index+1) {
+                @if(questions[questionId-1]?.questionNumber !== 3){
+                <button [classList]="['button']">{{question.name?.common}}</button>
+                }@else {
+                <button class="button">{{question.capital ||question.name.common}}</button>
+                }
+                }
             </div>
         </section>
     </div>

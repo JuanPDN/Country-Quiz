@@ -15,11 +15,23 @@ section {
 
 .button {
     font-size: 16px;
+    border: none;
+    color: var(--color-E2E4F3);
     font-weight: 600;
     background-color: rgb(57, 63, 110);
     padding: 24px 0px;
     border-radius: 15px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.button:hover {
+    background-image: var(--linear-gradiant);
+}
+
+.active {
+    background-image: var(--linear-gradiant);
 }
 
 .options {

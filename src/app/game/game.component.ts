@@ -15,6 +15,7 @@ import { GetDataService } from '../services/get-data.service';
 export class GameComponent implements OnInit {
     route: ActivatedRoute = inject(ActivatedRoute);
     questionId: number = 1;
+    response: boolean = false;
     questions: any[] = [];
 
     constructor(private dataService: GetDataService) {
@@ -23,12 +24,21 @@ export class GameComponent implements OnInit {
         });
     }
 
-    seeOptions(){
+    seeOptions(event: Event) {
+        let response = (event.target as HTMLButtonElement).textContent
+        if (!this.questions[this.questionId - 1].response) {
+            if(response === this.questions[this.questionId - 1]){
+                
+            }
+            
+            
+            this.questions[this.questionId - 1].response = true
+        }
         console.log(this.questions);
         
     }
-    randomCountries(): number {
-        return Math.floor(Math.random() * 250) + 1;
+    randomCountries(maxNum:number, minNum:number): number {
+        return Math.floor(Math.random() * maxNum) + minNum;
     }
 
     shuffle(array: any[]) {
@@ -43,30 +53,40 @@ export class GameComponent implements OnInit {
         this.dataService.getAllData().subscribe(
             (data) => {
                 let response = data.map((item: any) => {
-
+                    let questionNumber = Math.floor(Math.random() * 3) + 1
                     let options = [item]
+                    let question = ""
+                    let answer = ""
+
                     while (options.length < 4) {
-                        let randomIndex = this.randomCountries();
+                        let randomIndex = this.randomCountries(data.length, 1);
                         if (!options.includes(data[randomIndex])) {
                             options.push(data[randomIndex]);
                         }
                     }
 
-                    options = this.shuffle(options);                    
+                    options = this.shuffle(options);
+                    question = questionNumber == 1 ? `Which country is ${item.capital} the capital of?`
+                        : questionNumber == 2 ? `Which country does this flag ${item.flag} belong to?`
+                            : `Which city is the capital of ${item.name.common}?`
+                    answer = questionNumber !== 3 ? item.name.common : item.capital
 
                     return {
+                        question: question,
                         name: item.name.common,
                         capital: item.capital,
                         flag: item.flag,
                         options: options,
-                        questionNumber: Math.floor(Math.random() * 3) + 1,
+                        questionNumber: questionNumber,
+                        answer: answer,
+                        response: false,
                     }
                 })
                 for (let i = 0; i < 10; i++) {
-                    let randomIndex = this.randomCountries();
+                    let randomIndex = this.randomCountries(data.length, 1);
                     this.questions.push(response[randomIndex]);
                 }
             }
         );
-    }    
+    }
 }
