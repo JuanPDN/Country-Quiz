@@ -3,15 +3,15 @@
         <h1>Country Quiz</h1>
         <app-navbar />
         <section>
-
             <p class="question">{{questions[questionId-1]?.question}}</p>
-            <div (click)="seeOptions($event)" class="options">
+            <div class="options" (click)="seeOptions($event)">
                 @for(question of questions[questionId-1]?.options; track $index+1) {
-                @if(questions[questionId-1]?.questionNumber !== 3){
-                <button [classList]="['button']">{{question.name?.common}}</button>
-                }@else {
-                <button class="button">{{question.capital ||question.name.common}}</button>
-                }
+                    @if(questions[questionId -1].questionNuber !== 3){
+                        <button class="button">{{question.name.common}}
+                        </button>
+                    }@else {
+                        <button class="button">{{question.capital || question.name.common}}</button>
+                    }
                 }
             </div>
         </section>

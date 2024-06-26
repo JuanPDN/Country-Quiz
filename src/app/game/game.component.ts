@@ -27,15 +27,11 @@ export class GameComponent implements OnInit {
     seeOptions(event: Event) {
         let response = (event.target as HTMLButtonElement).textContent
         if (!this.questions[this.questionId - 1].response) {
-            if(response === this.questions[this.questionId - 1]){
-                
-            }
-            
-            
+            this.questions[this.questionId - 1].yourAnswer = response     
             this.questions[this.questionId - 1].response = true
-        }
+        }    
         console.log(this.questions);
-        
+            
     }
     randomCountries(maxNum:number, minNum:number): number {
         return Math.floor(Math.random() * maxNum) + minNum;
@@ -79,6 +75,7 @@ export class GameComponent implements OnInit {
                         options: options,
                         questionNumber: questionNumber,
                         answer: answer,
+                        yourAnswer: null,
                         response: false,
                     }
                 })
