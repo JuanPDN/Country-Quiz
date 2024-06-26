@@ -6,12 +6,7 @@
             <p class="question">{{questions[questionId-1]?.question}}</p>
             <div class="options" (click)="seeOptions($event)">
                 @for(question of questions[questionId-1]?.options; track $index+1) {
-                    @if(questions[questionId -1].questionNuber !== 3){
-                        <button class="button">{{question.name.common}}
-                        </button>
-                    }@else {
-                        <button class="button">{{question.capital || question.name.common}}</button>
-                    }
+                    <button [class]="['button', questions[questionId - 1].yourAnswer === question && 'active']">{{question}}</button>
                 }
             </div>
         </section>
