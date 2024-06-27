@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { GameComponent } from './game/game.component';
+import { FinishComponent } from './finish/finish.component';
 
 export const routes: Routes = [
     {
@@ -10,5 +11,10 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'game/1',
         pathMatch: 'full'
-    }
+    },
+    {
+        path: 'score',
+        component: FinishComponent,
+        pathMatch: 'full'
+    }   
 ];

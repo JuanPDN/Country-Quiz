@@ -21,16 +21,24 @@
 
 body {
     font-family: var(--font-primary);
-    /* background-image: url("../public/bg.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed; */
-    background: repeating-linear-gradient(
-        -70deg,
-        rgb(39,44,84),
-        rgb(39,44,84) 220px,
-        rgb(36,41,81) 220px,
-        rgb(36,41,81) 400px
-    );
+    background: repeating-linear-gradient(-70deg,
+            rgb(39, 44, 84),
+            rgb(39, 44, 84) 220px,
+            rgb(36, 41, 81) 220px,
+            rgb(36, 41, 81) 400px);
+}
+
+.button:hover {
+    background-image: var(--linear-gradiant);
+    transform: scale(1.03);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
 }

@@ -17,6 +17,8 @@ export class GameComponent implements OnInit {
     route: ActivatedRoute = inject(ActivatedRoute);
     questionId: number = 1;
     questions: any[] = [];
+    correctAnsewrs: number = 0;
+    totalResponses: number = 0;
 
     constructor(private dataService: GetDataService, private router: Router) {
         this.route.params.subscribe(params =>
@@ -29,18 +31,34 @@ export class GameComponent implements OnInit {
         if (!this.questions[this.questionId - 1].response) {
             this.questions[this.questionId - 1].yourAnswer = response?.trim();
             this.questions[this.questionId - 1].response = true;
-            this.nextQuestion()
+            if (this.totalResponses < 10) {
+                this.nextQuestion()
+            }
+        }
+        this.validateAnswer()
+    }
+
+    validateAnswer() {
+        this.totalResponses++
+        const yourAnswer = this.questions[this.questionId - 1].yourAnswer
+        const answer = this.questions[this.questionId - 1].answer
+        if (yourAnswer === answer) {
+            this.correctAnsewrs++
+        }
+        if (this.totalResponses === 10) {
+            setTimeout(() => {
+                this.router.navigate(['finish'])
+            },1500)
         }
     }
 
     nextQuestion() {
         setTimeout(() => {
             if (this.questionId < 10) {
-                this.router.navigate(['/game', this.questionId + 1])
+                this.router.navigate(['/score', this.questionId + 1])
             }
         }, 1500)
     }
-
 
     ngOnInit(): void {
         this.dataService.getAllData().subscribe((data) =>
