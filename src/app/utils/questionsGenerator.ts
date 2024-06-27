@@ -27,17 +27,14 @@ const genrateAnswer = (typeQuestion: number, item: any) => {
     return typeQuestion !== 3 ? item.name.common : item.capital.toString();
 }
 
-const generateOptions = (item: any, data: any, typeQuestion: number): any[] => {
-    const options = [typeQuestion !== 3 ? item.name.common : item.capital.toString()];
+const generateOptions = (item: any, countries: any, typeQuestion: number): any[] => {
+    const options = [genrateAnswer(typeQuestion, item)];
     while (options.length < 4) {
-        let randomIndex = randomCountries(data.length, 1);
-        let element = data[randomIndex];
-        if (element && !options.includes(data[randomIndex])) {
-            if (typeQuestion !== 3) {
-                options.push(data[randomIndex].name.common);
-            } else {
-                options.push(data[randomIndex].capital.toString());
-            }
+        const randomIndex = randomCountries(countries.length, 1);
+        const country = countries[randomIndex];
+        if (country && !options.includes(country)) {
+            typeQuestion !== 3 ? options.push(country.name.common)
+                : options.push(country.capital.toString());
         }
     }
     return shuffle(options)
