@@ -34,8 +34,8 @@ export class GameComponent implements OnInit {
             if (this.totalResponses < 10) {
                 this.nextQuestion()
             }
+            this.validateAnswer()
         }
-        this.validateAnswer()
     }
 
     validateAnswer() {
@@ -47,7 +47,7 @@ export class GameComponent implements OnInit {
         }
         if (this.totalResponses === 10) {
             setTimeout(() => {
-                this.router.navigate(['finish'])
+                this.router.navigate(['score'])
             },1500)
         }
     }
@@ -55,7 +55,7 @@ export class GameComponent implements OnInit {
     nextQuestion() {
         setTimeout(() => {
             if (this.questionId < 10) {
-                this.router.navigate(['/score', this.questionId + 1])
+                this.router.navigate(['/game', this.questionId + 1])
             }
         }, 1500)
     }
