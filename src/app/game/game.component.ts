@@ -38,7 +38,7 @@ export class GameComponent implements OnInit {
         const tries = this.scoreService.tries
         let response = (event.target as HTMLButtonElement).textContent!;
         if (!this.questions[this.questionId - 1].response) {
-            this.questions[this.questionId - 1].yourAnswer = response?.trim();
+            this.questions[this.questionId - 1].yourAnswer = response.trim();
             this.questions[this.questionId - 1].response = true;
             if (tries < 10) {
                 this.nextQuestion()

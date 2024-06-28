@@ -7,9 +7,9 @@
         <app-loading />
         }@else{
         <section>
-            <p class="question">{{questions[questionId-1]?.question }}</p>
+            <p class="question">{{questions[questionId-1].question }}</p>
             <div class="options" (click)="submitAnswer($event)">
-                @for(question of questions[questionId-1]?.options; track $index+1) {
+                @for(question of questions[questionId-1].options; track $index+1) {
                 <button [class]="['button', 
                 questions[questionId - 1].yourAnswer === question && 'active',
                 questions[questionId - 1].response && 'disabled']">
