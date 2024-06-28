@@ -26,4 +26,8 @@ export class FinishComponent {
       this.router.navigate(['game/1'])
       this.scoreService.restart();
   }
+
+  ngOnInit(): void {
+    this.scoreService.tries === 0 && this.router.navigate(['game/1'])
+  }
 }
