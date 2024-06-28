@@ -1,0 +1,10 @@
+<ul>
+    @for(number of numbers; track $index+1) {
+    <li>
+        <a [routerLink]="['/game',number]" routerLinkActive="active">
+            {{number}}
+        </a>
+    </li>
+    }
+</ul>
+<router-outlet />

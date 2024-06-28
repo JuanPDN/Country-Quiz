@@ -1,0 +1,38 @@
+ul {
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 16px 0px;
+    gap: 12px;
+}
+
+@media screen and (min-width: 640px) {
+    ul {
+        margin: 16px 68px;
+    }
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    color: var(--color-E2E4F3);
+    text-decoration: none;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 50%;
+    color: var(--color-E2E4F3);
+    background-color: rgba(55, 61, 109);
+    cursor: pointer;
+}
+
+.active {
+    background-image: var(--linear-gradiant);
+}

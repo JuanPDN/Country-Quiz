@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="card">
+        <h1>Country Quiz</h1>
+        <app-navbar />
+
+        @if (load) {
+        <app-loading />
+        }@else{
+        <section>
+            <p class="question">{{questions[questionId-1].question }}</p>
+            <div class="options" (click)="submitAnswer($event)">
+                @for(question of questions[questionId-1].options; track $index+1) {
+                <button [class]="['button', 
+                questions[questionId - 1].yourAnswer === question && 'active',
+                questions[questionId - 1].response && 'disabled']">
+                    {{question}}
+                    @if(questions[questionId - 1].response){
+                    @if(questions[questionId - 1].yourAnswer === question){
+                    @if(questions[questionId - 1].answer === question){
+                    <img src="/Check_round_fill.svg" alt="">
+                    }@else {
+                    <img src="/Close_round_fill.svg" alt="">
+                    }
+                    }@if(questions[questionId - 1].answer === question && questions[questionId - 1].yourAnswer !==
+                    question){
+                    <img src="/Check_round_fill.svg" alt="">
+                    }
+                    }
+                </button>
+                }
+            </div>
+        </section>
+        }
+
+    </div>
+</div>
+<router-outlet />

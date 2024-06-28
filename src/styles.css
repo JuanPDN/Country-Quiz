@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --linear-gradiant: linear-gradient(90deg, #E65895, #BC6BE8);
+    --color-E2E4F3: #393F6E;
+    --color-E2E4F3: #E2E4F3;
+    --color-343964: #343964;
+    --color-3E9FFF: #3E9FFF;
+    --color-DD524C: #DD524C;
+    --color-8B8EAB: #8B8EAB;
+    --color-FFECC8: #FFECC8;
+    --font-primary: 'Be Vietnam Pro', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: repeating-linear-gradient(-70deg,
+            rgb(39, 44, 84),
+            rgb(39, 44, 84) 220px,
+            rgb(36, 41, 81) 220px,
+            rgb(36, 41, 81) 400px);
+}
+
+.button:hover {
+    background-image: var(--linear-gradiant);
+    transform: scale(1.03);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+}
