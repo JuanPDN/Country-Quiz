@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, inject, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 
 import { NavbarComponent } from "../navbar/navbar.component";
 import { GetDataService } from '../services/get-data.service';
 import { UpdateScoreService } from '../services/update-score.service';
+import { Meta } from '@angular/platform-browser';
 
 
 
@@ -12,7 +13,7 @@ import { UpdateScoreService } from '../services/update-score.service';
     standalone: true,
     templateUrl: './game.component.html',
     styleUrl: './game.component.css',
-    imports: [NavbarComponent]
+    imports: [NavbarComponent, RouterOutlet]
 })
 export class GameComponent implements OnInit {
     route: ActivatedRoute = inject(ActivatedRoute);
@@ -20,7 +21,12 @@ export class GameComponent implements OnInit {
     questions: any[] = [];
 
 
-    constructor(private dataService: GetDataService, private router: Router, private scoreService: UpdateScoreService) {
+    constructor(
+        private dataService: GetDataService,
+        private router: Router,
+        private scoreService: UpdateScoreService,
+        private meta : Meta
+    ) {
         this.route.params.subscribe(params =>
             this.questionId = Number(params['questionId'])
         );
@@ -66,5 +72,6 @@ export class GameComponent implements OnInit {
     ngOnInit(): void {
         this.dataService.getAllData().subscribe((data) =>
             this.questions = data)
+        this.meta.updateTag({name: 'game quiz country', content: 'Country Quiz - Game'})
     }
 }
