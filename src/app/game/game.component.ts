@@ -1,10 +1,11 @@
-import { Component, EventEmitter, OnInit, inject, Output } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 
 import { NavbarComponent } from "../navbar/navbar.component";
-import { GetDataService } from '../services/get-data.service';
-import { UpdateScoreService } from '../services/update-score.service';
-import { Meta } from '@angular/platform-browser';
+import { GetDataService } from '../services/getData/get-data.service';
+import { UpdateScoreService } from '../services/updateScore/update-score.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 
 
@@ -13,11 +14,12 @@ import { Meta } from '@angular/platform-browser';
     standalone: true,
     templateUrl: './game.component.html',
     styleUrl: './game.component.css',
-    imports: [NavbarComponent, RouterOutlet]
+    imports: [NavbarComponent, RouterOutlet, LoadingComponent]
 })
 export class GameComponent implements OnInit {
     route: ActivatedRoute = inject(ActivatedRoute);
     questionId: number = 1;
+    load: boolean = true;
     questions: any[] = [];
 
 
@@ -25,7 +27,7 @@ export class GameComponent implements OnInit {
         private dataService: GetDataService,
         private router: Router,
         private scoreService: UpdateScoreService,
-        private meta : Meta
+        private meta: Meta
     ) {
         this.route.params.subscribe(params =>
             this.questionId = Number(params['questionId'])
@@ -70,8 +72,10 @@ export class GameComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.dataService.getAllData().subscribe((data) =>
-            this.questions = data)
-        this.meta.updateTag({name: 'game quiz country', content: 'Country Quiz - Game'})
+        this.dataService.getAllData().subscribe((data) => {
+            this.load = false
+            return this.questions = data
+        })
+        this.meta.updateTag({ name: 'game quiz country', content: 'Country Quiz - Game' })
     }
 }

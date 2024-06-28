@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {  Router } from '@angular/router';
-import { UpdateScoreService } from '../services/update-score.service';
+import { UpdateScoreService } from '../services/updateScore/update-score.service';
 import { Meta } from '@angular/platform-browser';
 
 @Component({

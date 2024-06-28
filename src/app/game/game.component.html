@@ -2,6 +2,10 @@
     <div class="card">
         <h1>Country Quiz</h1>
         <app-navbar />
+
+        @if (load) {
+        <app-loading />
+        }@else{
         <section>
             <p class="question">{{questions[questionId-1]?.question }}</p>
             <div class="options" (click)="submitAnswer($event)">
@@ -26,6 +30,8 @@
                 }
             </div>
         </section>
+        }
+
     </div>
 </div>
 <router-outlet />
