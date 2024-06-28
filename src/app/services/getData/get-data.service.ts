@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map, retry } from 'rxjs';
 import { generateQuestions } from '../../utils/questionsGenerator';
 import { environment } from '../../../environments/environment';
+import { Question } from '../../interfaces/question';
+import { Country } from '../../interfaces/country';
 
 
 
@@ -12,15 +14,14 @@ import { environment } from '../../../environments/environment';
 export class GetDataService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getAllData(): Observable<any> {
+  getAllData(): Observable<Question[]> {
     return this.http
-    .get(environment.API_URL)
-    .pipe(
-      retry(1),
-      map((data: any) =>
-      generateQuestions(data)
-    ));
+      .get<Country[]>(environment.API_URL)
+      .pipe(
+        retry(1),
+        map((data: Country[]) => generateQuestions(data))
+      );
   }
 }

@@ -6,6 +6,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { GetDataService } from '../services/getData/get-data.service';
 import { UpdateScoreService } from '../services/updateScore/update-score.service';
 import { LoadingComponent } from '../loading/loading.component';
+import { Question } from '../interfaces/question';
 
 
 
@@ -20,7 +21,7 @@ export class GameComponent implements OnInit {
     route: ActivatedRoute = inject(ActivatedRoute);
     questionId: number = 1;
     load: boolean = true;
-    questions: any[] = [];
+    questions: Question[] = [];
 
     constructor(
         private dataService: GetDataService,
@@ -35,7 +36,7 @@ export class GameComponent implements OnInit {
 
     submitAnswer(event: Event) {
         const tries = this.scoreService.tries
-        let response = (event.target as HTMLButtonElement).textContent
+        let response = (event.target as HTMLButtonElement).textContent!;
         if (!this.questions[this.questionId - 1].response) {
             this.questions[this.questionId - 1].yourAnswer = response?.trim();
             this.questions[this.questionId - 1].response = true;

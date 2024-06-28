@@ -1,4 +1,7 @@
-const shuffle = (array: any[]) => {
+import { Country } from "../interfaces/country";
+import { Question } from "../interfaces/question";
+
+const shuffle = (array: string[]) => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -10,11 +13,11 @@ const randomCountries = (maxNum: number, minNum: number): number => {
     return Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
 }
 
-const gerateTypeQuestion = (): number => {
+const generateTypeQuestion = (): number => {
     return Math.floor(Math.random() * 3) + 1
 }
 
-const generateQuestion = (TypeQuestion: number, data: any): string => {
+const generateQuestion = (TypeQuestion: number, data: Country): string => {
     const question: { [key: number]: string } = {
         1: `Which country is ${data.capital} the capital of?`,
         2: `Which country does this flag ${data.flag} belong to?`,
@@ -23,12 +26,12 @@ const generateQuestion = (TypeQuestion: number, data: any): string => {
     return question[TypeQuestion]
 }
 
-const genrateAnswer = (typeQuestion: number, item: any) => {
-    return typeQuestion !== 3 ? item.name.common : item.capital.toString();
+const generateAnswer = (typeQuestion: number, item: Country): string => {
+    return typeQuestion !== 3 ? item.name.common : item.capital?.toString() || '';
 }
 
-const generateOptions = (item: any, countries: any, typeQuestion: number): any[] => {
-    const options = [genrateAnswer(typeQuestion, item)];
+const generateOptions = (item: any, countries: any, typeQuestion: number): string[] => {
+    const options = [generateAnswer(typeQuestion, item)];
     while (options.length < 4) {
         const randomIndex = randomCountries(countries.length, 1);
         const country = countries[randomIndex];
@@ -40,7 +43,7 @@ const generateOptions = (item: any, countries: any, typeQuestion: number): any[]
     return shuffle(options)
 }
 
-const selectQuestion = (data: any): any[] => {
+const selectQuestion = (data: Question[]): Question[] => {
     const questions = []
     for (let i = 0; i < 10; i++) {
         let randomIndex = randomCountries(data.length, 1);
@@ -52,27 +55,29 @@ const selectQuestion = (data: any): any[] => {
     return questions
 }
 
-export const generateQuestions = (data: any): any => {
+export const generateQuestions = (data: Country[]): Question[] => {
     if (data) {
-        const filterData = data.filter((item: any) => item.capital !== undefined && item.name.common !== undefined)
-        const response = filterData.map((item: any) => {
-            const typeQuestion = gerateTypeQuestion()
-            const options = generateOptions(item, filterData, typeQuestion)
+        const filterData = data.filter((item: Country) => item.capital !== undefined && item.name.common !== undefined);
+        const response = filterData.map((item: Country) => {
+            const typeQuestion = generateTypeQuestion();
+            const options = generateOptions(item, filterData, typeQuestion);
             const question = generateQuestion(typeQuestion, item);
-            const answer = genrateAnswer(typeQuestion, item)
+            const answer = generateAnswer(typeQuestion, item);
 
             return {
-                question: question,
+                question,
                 name: item.name.common,
-                capital: item.capital,
+                capital: item.capital!,
                 flag: item.flag,
-                options: options,
+                options,
                 questionNumber: typeQuestion,
-                answer: answer,
+                answer,
                 yourAnswer: null,
                 response: false,
-            }
-        })
-        return selectQuestion(response)
+            };
+        });
+        return selectQuestion(response);
     }
+    return [];
 }
+

@@ -6,6 +6,6 @@ export interface Question {
     options: string[],
     questionNumber: number,
     answer: string,
-    yourAnswer: null,
+    yourAnswer: string | null,
     response: boolean,
 }
