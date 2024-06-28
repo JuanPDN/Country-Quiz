@@ -22,7 +22,6 @@ export class GameComponent implements OnInit {
     load: boolean = true;
     questions: any[] = [];
 
-
     constructor(
         private dataService: GetDataService,
         private router: Router,
@@ -50,7 +49,6 @@ export class GameComponent implements OnInit {
     validateAnswer() {
         this.scoreService.updateTries()
         const tries = this.scoreService.tries
-
         const yourAnswer = this.questions[this.questionId - 1].yourAnswer
         const answer = this.questions[this.questionId - 1].answer
         if (yourAnswer === answer) {
@@ -76,6 +74,6 @@ export class GameComponent implements OnInit {
             this.load = false
             return this.questions = data
         })
-        this.meta.updateTag({ name: 'game quiz country', content: 'Country Quiz - Game' })
+        this.meta.updateTag({ name: 'game quiz country', content: 'this is a game when you guess the country' })
     }
 }
